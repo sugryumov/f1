@@ -1,4 +1,4 @@
-# F1
+# F1 Standings
 
 ## Development
 
