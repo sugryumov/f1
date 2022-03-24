@@ -1,33 +1,13 @@
-import { useState } from 'react';
-import { Layout, Menu } from 'antd';
-import { MenuClickEventHandler } from 'rc-menu/lib/interface';
-import { LogoF1 } from '@/common/SVGIcon';
-import './index.css';
+import { FC } from 'react';
+import { Layout } from 'antd';
+import { AppRouter } from '../AppRouter';
+import { Navbar } from '../Navbar';
 
-export const App = () => {
-  const [state, setState] = useState<{ current: string }>({
-    current: 'standings',
-  });
-
-  const handleClick: MenuClickEventHandler = ({ key }) => {
-    setState({ current: key });
-  };
-
-  return (
-    <Layout className="app__layout">
-      <Layout.Header className="app__header">
-        <LogoF1 />
-
-        <Menu
-          mode="horizontal"
-          onClick={handleClick}
-          selectedKeys={[state?.current]}
-          className="app__menu"
-        >
-          <Menu.Item key="standings">Standings</Menu.Item>
-          <Menu.Item key="drivers">Drivers</Menu.Item>
-        </Menu>
-      </Layout.Header>
-    </Layout>
-  );
-};
+export const App: FC = () => (
+  <Layout>
+    <Navbar />
+    <Layout.Content>
+      <AppRouter />
+    </Layout.Content>
+  </Layout>
+);

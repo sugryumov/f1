@@ -1,0 +1,10 @@
+.app__header {
+  .app__logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .app__auth {
+    text-align: right;
+  }
+}
