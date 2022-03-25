@@ -1,21 +1,82 @@
-import { AuthAction, AuthActionsEnum, AuthState } from './types';
+import axios from 'axios';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { IUser } from '@/models/IUser';
+import { AuthState } from './types';
 
 const initialState: AuthState = {
   isAuth: false,
+  user: {} as IUser,
+  loading: false,
+  error: null,
 };
 
-export const authReducer = (
-  state = initialState,
-  action: AuthAction,
-): AuthState => {
-  switch (action.type) {
-    case AuthActionsEnum.SET_AUTH:
-      return {
-        ...state,
-        isAuth: action.payload,
-      };
+export const fetchUser = createAsyncThunk(
+  'auth/fetchUser',
+  async (params: IUser) => {
+    const response = await axios.get<IUser[]>('./users.json');
 
-    default:
-      return state;
-  }
-};
+    return {
+      params,
+      users: response.data,
+    };
+  },
+);
+
+const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+
+  reducers: {
+    setIsAuth(state, { payload }) {
+      state.isAuth = payload;
+    },
+    loginFromLS(state, { payload }) {
+      state.user.username = payload;
+      state.isAuth = true;
+    },
+    logout() {
+      localStorage.removeItem('auth');
+      localStorage.removeItem('username');
+      return initialState;
+    },
+  },
+
+  extraReducers: builder => {
+    builder.addCase(fetchUser.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+
+    builder.addCase(fetchUser.fulfilled, (state, { payload }) => {
+      state.loading = false;
+
+      const { params, users } = payload;
+
+      const findUser = users.find(
+        (user: IUser) =>
+          params.username === user.username && params.password === '123',
+      );
+
+      if (findUser) {
+        localStorage.setItem('auth', 'true');
+        localStorage.setItem('username', findUser.username);
+
+        state.isAuth = true;
+        state.user = findUser;
+      } else {
+        state.error = 'Incorrect username or password';
+      }
+    });
+
+    builder.addCase(fetchUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = JSON.stringify(
+        action.error,
+        Object.getOwnPropertyNames(action.error),
+      );
+    });
+  },
+});
+
+export const AuthActionCreators = authSlice.actions;
+export default authSlice.reducer;

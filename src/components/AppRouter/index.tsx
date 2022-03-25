@@ -1,39 +1,29 @@
-import { FC } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { IRoute, privateRoutes, publicRoutes, RouteNames } from '@/routes';
-import { useTypedSelector } from '@/hooks/useTypedSelector';
+import { AppLayout } from '../AppLayout';
+import { ProtectedRoutes } from './ProtectedRoutes';
 
-export const AppRouter: FC = () => {
-  const { isAuth } = useTypedSelector(state => state.authReducer);
+export const AppRouter = () => (
+  <Routes>
+    <Route path={RouteNames.LANDING} element={<AppLayout />}>
+      {publicRoutes.map(
+        ({ index, key, path, component: RouteCompoent }: IRoute) => (
+          <Route
+            index={index}
+            key={key}
+            path={path}
+            element={<RouteCompoent />}
+          />
+        ),
+      )}
 
-  return (
-    <>
-      <Routes>
-        {!isAuth &&
-          publicRoutes.map((route: IRoute) => (
-            <Route
-              key={route.key}
-              path={route.path}
-              element={<route.element />}
-            />
-          ))}
-
-        {isAuth &&
-          privateRoutes.map((route: IRoute) => (
-            <Route
-              key={route.key}
-              path={route.path}
-              element={<route.element />}
-            />
-          ))}
-
+      {privateRoutes.map(({ key, path, component }: IRoute) => (
         <Route
-          path={RouteNames.NOT_FOUND}
-          element={
-            <Navigate to={isAuth ? RouteNames.DRIVERS : RouteNames.LOGIN} />
-          }
+          key={key}
+          path={path}
+          element={<ProtectedRoutes component={component} />}
         />
-      </Routes>
-    </>
-  );
-};
+      ))}
+    </Route>
+  </Routes>
+);

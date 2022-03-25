@@ -1,13 +1,15 @@
-import { FC } from 'react';
-import { Layout } from 'antd';
+import { FC, useEffect } from 'react';
+import { useActions } from '@/hooks/useActions';
 import { AppRouter } from '../AppRouter';
-import { Navbar } from '../Navbar';
 
-export const App: FC = () => (
-  <Layout>
-    <Navbar />
-    <Layout.Content>
-      <AppRouter />
-    </Layout.Content>
-  </Layout>
-);
+export const App: FC = () => {
+  const { loginFromLS } = useActions();
+
+  useEffect(() => {
+    if (localStorage.getItem('auth')) {
+      loginFromLS(localStorage.getItem('username'));
+    }
+  }, []);
+
+  return <AppRouter />;
+};

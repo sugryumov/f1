@@ -1,7 +1,7 @@
-const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const { src, build } = require('./paths');
+const { src, build, public } = require('./paths');
 
 module.exports = {
   entry: [`${src}/index.tsx`],
@@ -14,6 +14,10 @@ module.exports = {
   },
 
   plugins: [
+    new CopyWebpackPlugin({
+      patterns: [{ from: public, to: 'assets' }],
+    }),
+
     new HtmlWebpackPlugin({
       favicon: `${src}/images/favicon.ico`,
       template: `${src}/index.html`,
@@ -41,6 +45,7 @@ module.exports = {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
     alias: {
       '@': src,
+      'assets': public,
     },
   },
 };

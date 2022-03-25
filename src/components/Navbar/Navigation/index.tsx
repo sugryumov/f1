@@ -10,6 +10,16 @@ export const Navigation: FC = () => (
     selectable={false}
     className="navigation"
   >
+    <Menu.Item key="home" className="navigation__item">
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          isActive ? 'navigation__active' : 'navigation__link'
+        }
+      >
+        Home
+      </NavLink>
+    </Menu.Item>
     <Menu.Item key="drivers" className="navigation__item">
       <NavLink
         to="drivers"

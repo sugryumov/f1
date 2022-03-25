@@ -1,16 +1,32 @@
-import { FC } from 'react';
-import { Button, Col, Layout, Menu, Row } from 'antd';
+import { FC, useState } from 'react';
+import { Modal, Button, Col, Layout, Row } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
+import { useActions } from '@/hooks/useActions';
 import { LogoF1 } from '@/common/SVGIcon';
 import { Navigation } from './Navigation';
+import { LoginForm } from '../LoginForm';
 import './index.css';
 
 export const Navbar: FC = () => {
+  let navigate = useNavigate();
+  const { logout } = useActions();
   const { isAuth } = useTypedSelector(state => state.authReducer);
 
-  const handleClickLogin = () => {};
+  const handleClickLogin = () => {
+    setIsModalVisible(true);
+  };
 
-  const handleClickLogout = () => {};
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleClickLogout = () => {
+    logout();
+    navigate('/');
+  };
+
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   return (
     <Layout.Header className="app__header">
@@ -33,6 +49,16 @@ export const Navbar: FC = () => {
           )}
         </Col>
       </Row>
+
+      <Modal
+        title="Basic Modal"
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        footer={null}
+        width={400}
+      >
+        <LoginForm />
+      </Modal>
     </Layout.Header>
   );
 };
