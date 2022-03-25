@@ -6,21 +6,18 @@ import { AuthState } from './types';
 const initialState: AuthState = {
   isAuth: false,
   user: {} as IUser,
-  loading: false,
+  loading: 'begin',
   error: null,
 };
 
-export const fetchUser = createAsyncThunk(
-  'auth/fetchUser',
-  async (params: IUser) => {
-    const response = await axios.get<IUser[]>('./users.json');
+const fetchUser = createAsyncThunk('auth/fetchUser', async (params: IUser) => {
+  const response = await axios.get<IUser[]>('./users.json');
 
-    return {
-      params,
-      users: response.data,
-    };
-  },
-);
+  return {
+    params,
+    users: response.data,
+  };
+});
 
 const authSlice = createSlice({
   name: 'auth',
@@ -43,13 +40,11 @@ const authSlice = createSlice({
 
   extraReducers: builder => {
     builder.addCase(fetchUser.pending, state => {
-      state.loading = true;
+      state.loading = 'pending';
       state.error = null;
     });
 
     builder.addCase(fetchUser.fulfilled, (state, { payload }) => {
-      state.loading = false;
-
       const { params, users } = payload;
 
       const findUser = users.find(
@@ -61,15 +56,17 @@ const authSlice = createSlice({
         localStorage.setItem('auth', 'true');
         localStorage.setItem('username', findUser.username);
 
+        state.loading = 'success';
         state.isAuth = true;
         state.user = findUser;
       } else {
+        state.loading = 'failure';
         state.error = 'Incorrect username or password';
       }
     });
 
     builder.addCase(fetchUser.rejected, (state, action) => {
-      state.loading = false;
+      state.loading = 'failure';
       state.error = JSON.stringify(
         action.error,
         Object.getOwnPropertyNames(action.error),
@@ -78,5 +75,5 @@ const authSlice = createSlice({
   },
 });
 
-export const AuthActionCreators = authSlice.actions;
+export const authActions = { ...authSlice.actions, fetchUser };
 export default authSlice.reducer;

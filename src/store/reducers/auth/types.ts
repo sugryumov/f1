@@ -3,6 +3,6 @@ import { IUser } from '@/models/IUser';
 export interface AuthState {
   isAuth: boolean;
   user: IUser;
-  loading: boolean;
+  loading: 'begin' | 'pending' | 'failure' | 'success';
   error: null | string;
 }

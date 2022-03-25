@@ -1,14 +1,13 @@
 import { FC, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { Button, Input, Form, notification } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { fetchUser } from '@/store/reducers/auth';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
+import { useActions } from '@/hooks/useActions';
 import { rules } from '@/utils/rules';
 import './index.css';
 
 export const LoginForm: FC = () => {
-  const dispatch = useDispatch();
+  const { setIsLoginModalVisible, fetchUser } = useActions();
   const { loading, error } = useTypedSelector(store => store.authReducer);
 
   useEffect(() => {
@@ -19,8 +18,14 @@ export const LoginForm: FC = () => {
     }
   }, [error]);
 
+  useEffect(() => {
+    if (loading === 'success') {
+      setIsLoginModalVisible(false);
+    }
+  }, [loading]);
+
   const onFinish = ({ username, password }) => {
-    dispatch(fetchUser({ username, password }));
+    fetchUser({ username, password });
   };
 
   return (
@@ -56,7 +61,7 @@ export const LoginForm: FC = () => {
           type="primary"
           htmlType="submit"
           className="login-form__button"
-          loading={loading}
+          loading={loading === 'pending'}
         >
           Submit
         </Button>

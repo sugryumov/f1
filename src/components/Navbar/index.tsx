@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Modal, Button, Col, Layout, Row } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
@@ -10,23 +10,22 @@ import './index.css';
 
 export const Navbar: FC = () => {
   let navigate = useNavigate();
-  const { logout } = useActions();
+  const { logout, setIsLoginModalVisible } = useActions();
   const { isAuth } = useTypedSelector(state => state.authReducer);
+  const { isLoginModalVisible } = useTypedSelector(state => state.uiReducer);
 
   const handleClickLogin = () => {
-    setIsModalVisible(true);
+    setIsLoginModalVisible(true);
   };
 
   const handleCancel = () => {
-    setIsModalVisible(false);
+    setIsLoginModalVisible(false);
   };
 
   const handleClickLogout = () => {
     logout();
     navigate('/');
   };
-
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   return (
     <Layout.Header className="app__header">
@@ -52,7 +51,7 @@ export const Navbar: FC = () => {
 
       <Modal
         title="Basic Modal"
-        visible={isModalVisible}
+        visible={isLoginModalVisible}
         onCancel={handleCancel}
         footer={null}
         width={400}
