@@ -12,12 +12,23 @@ const initialState: AuthState = {
 };
 
 const fetchUser = createAsyncThunk('auth/fetchUser', async (params: IUser) => {
+  await new Promise(resolve => setTimeout(resolve, 1000));
+
   const response = await axios.get<IUser[]>('./users.json');
 
-  return {
-    params,
-    users: response.data,
-  };
+  const findUser = response.data.find(
+    (user: IUser) =>
+      params.username === user.username && params.password === '123',
+  );
+
+  if (findUser) {
+    localStorage.setItem('auth', 'true');
+    localStorage.setItem('username', findUser.username);
+
+    return findUser;
+  } else {
+    return null;
+  }
 });
 
 const authSlice = createSlice({
@@ -46,20 +57,10 @@ const authSlice = createSlice({
     });
 
     builder.addCase(fetchUser.fulfilled, (state, { payload }) => {
-      const { params, users } = payload;
-
-      const findUser = users.find(
-        (user: IUser) =>
-          params.username === user.username && params.password === '123',
-      );
-
-      if (findUser) {
-        localStorage.setItem('auth', 'true');
-        localStorage.setItem('username', findUser.username);
-
+      if (payload) {
         state.loading = LoadingStatuses.SUCCESS;
         state.isAuth = true;
-        state.user = findUser;
+        state.user = payload;
       } else {
         state.loading = LoadingStatuses.FAILURE;
         state.error = 'Incorrect username or password';
