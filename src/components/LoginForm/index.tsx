@@ -8,6 +8,8 @@ import { rules } from '@/utils/rules';
 import './index.css';
 
 export const LoginForm: FC = () => {
+  const [form] = Form.useForm();
+
   const { setIsLoginModalVisible, fetchUser } = useActions();
   const { loading, error } = useTypedSelector(store => store.authReducer);
 
@@ -22,6 +24,7 @@ export const LoginForm: FC = () => {
   useEffect(() => {
     if (loading === LoadingStatuses.SUCCESS) {
       setIsLoginModalVisible(false);
+      form.resetFields();
     }
   }, [loading]);
 
@@ -31,8 +34,7 @@ export const LoginForm: FC = () => {
 
   return (
     <Form
-      name="basic"
-      size="middle"
+      form={form}
       layout="vertical"
       className="login-form"
       onFinish={onFinish}
