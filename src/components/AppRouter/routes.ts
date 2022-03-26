@@ -3,19 +3,13 @@ import { Standings } from '@/pages/Standings';
 import { Drivers } from '@/pages/Drivers';
 import { Landing } from '@/pages/Landing';
 import { NotFound } from '@/pages/NotFound';
+import { RouteNames } from '@/enums/routes';
 
 export interface IRoute {
   key: string;
   path: string;
   component: ComponentType;
   index?: boolean;
-}
-
-export enum RouteNames {
-  NOT_FOUND = '*',
-  LANDING = '/',
-  DRIVERS = 'drivers',
-  STANDINGS = 'standings',
 }
 
 export const publicRoutes: IRoute[] = [

@@ -1,6 +1,6 @@
 import { ComponentType, FC } from 'react';
 import { Navigate } from 'react-router-dom';
-import { RouteNames } from '@/routes';
+import { RouteNames } from '@/enums/routes';
 
 interface IProps {
   component: ComponentType;

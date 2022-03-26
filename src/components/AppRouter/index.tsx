@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import { IRoute, privateRoutes, publicRoutes, RouteNames } from '@/routes';
+import { RouteNames } from '@/enums/routes';
+import { IRoute, privateRoutes, publicRoutes } from './routes';
 import { AppLayout } from '../AppLayout';
 import { ProtectedRoutes } from './ProtectedRoutes';
 
