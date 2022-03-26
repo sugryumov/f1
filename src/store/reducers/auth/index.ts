@@ -2,11 +2,12 @@ import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { IUser } from '@/models/IUser';
 import { AuthState } from './types';
+import { LoadingStatuses } from '@/enums/statuses';
 
 const initialState: AuthState = {
   isAuth: false,
   user: {} as IUser,
-  loading: 'begin',
+  loading: LoadingStatuses.BEGIN,
   error: null,
 };
 
@@ -40,7 +41,7 @@ const authSlice = createSlice({
 
   extraReducers: builder => {
     builder.addCase(fetchUser.pending, state => {
-      state.loading = 'pending';
+      state.loading = LoadingStatuses.PENDING;
       state.error = null;
     });
 
@@ -56,17 +57,17 @@ const authSlice = createSlice({
         localStorage.setItem('auth', 'true');
         localStorage.setItem('username', findUser.username);
 
-        state.loading = 'success';
+        state.loading = LoadingStatuses.SUCCESS;
         state.isAuth = true;
         state.user = findUser;
       } else {
-        state.loading = 'failure';
+        state.loading = LoadingStatuses.FAILURE;
         state.error = 'Incorrect username or password';
       }
     });
 
     builder.addCase(fetchUser.rejected, (state, action) => {
-      state.loading = 'failure';
+      state.loading = LoadingStatuses.FAILURE;
       state.error = JSON.stringify(
         action.error,
         Object.getOwnPropertyNames(action.error),

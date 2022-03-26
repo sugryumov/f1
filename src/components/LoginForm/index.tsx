@@ -1,6 +1,7 @@
 import { FC, useEffect } from 'react';
 import { Button, Input, Form, notification } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { LoadingStatuses } from '@/enums/statuses';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useActions } from '@/hooks/useActions';
 import { rules } from '@/utils/rules';
@@ -19,7 +20,7 @@ export const LoginForm: FC = () => {
   }, [error]);
 
   useEffect(() => {
-    if (loading === 'success') {
+    if (loading === LoadingStatuses.SUCCESS) {
       setIsLoginModalVisible(false);
     }
   }, [loading]);
@@ -61,7 +62,7 @@ export const LoginForm: FC = () => {
           type="primary"
           htmlType="submit"
           className="login-form__button"
-          loading={loading === 'pending'}
+          loading={loading === LoadingStatuses.PENDING}
         >
           Submit
         </Button>
