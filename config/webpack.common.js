@@ -47,5 +47,8 @@ module.exports = {
       '@': src,
       'assets': public,
     },
+    fallback: {
+      stream: require.resolve('stream-browserify'),
+    },
   },
 };
