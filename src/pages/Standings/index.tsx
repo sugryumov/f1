@@ -1,17 +1,10 @@
-import { FC, useEffect, useState } from 'react';
-import network from '@/network';
+import { FC } from 'react';
+import { Skeleton, Result } from 'antd';
+import { useGetStandingsQuery } from '@/services/standingsService';
 import './index.css';
 
 export const Standings: FC = () => {
-  const [data, setData] = useState<any>([]);
-
-  useEffect(() => {
-    const fetchStandings = network.getStandings({ year: 2022 });
-
-    fetchStandings.then((res: any) =>
-      setData(res.elements[1].elements[0].elements[0].elements),
-    );
-  }, []);
+  const { data, error, isLoading } = useGetStandingsQuery(2022);
 
   const renderStandings = data?.map(({ elements, attributes }) => {
     const drivers = elements[0].elements;
@@ -33,5 +26,11 @@ export const Standings: FC = () => {
     );
   });
 
-  return <div>{renderStandings}</div>;
+  return (
+    <div>
+      <Skeleton loading={isLoading} active />
+      {error && <Result status="error">{error}</Result>}
+      {renderStandings}
+    </div>
+  );
 };
