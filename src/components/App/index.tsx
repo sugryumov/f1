@@ -3,11 +3,14 @@ import { useActions } from '@/hooks/useActions';
 import { AppRouter } from '../AppRouter';
 
 export const App: FC = () => {
-  const { loginFromLS } = useActions();
+  const { setCredentials } = useActions();
 
   useEffect(() => {
-    if (localStorage.getItem('auth')) {
-      loginFromLS(localStorage.getItem('username'));
+    if (localStorage.getItem('token')) {
+      setCredentials({
+        token: localStorage.getItem('token'),
+        user: JSON.parse(localStorage.getItem('user')),
+      });
     }
   }, []);
 

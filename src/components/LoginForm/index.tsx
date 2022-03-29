@@ -1,35 +1,34 @@
 import { FC, useEffect } from 'react';
 import { Button, Input, Form, notification } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { LoadingStatuses } from '@/enums/statuses';
-import { useTypedSelector } from '@/hooks/useTypedSelector';
+import { useFetchAuthMutation } from '@/services/authService';
 import { useActions } from '@/hooks/useActions';
+import { IUser } from '@/models/IUser';
 import { rules } from '@/utils/rules';
 import './index.css';
 
 export const LoginForm: FC = () => {
   const [form] = Form.useForm();
 
-  const { setIsLoginModalVisible, fetchUser } = useActions();
-  const { loading, error } = useTypedSelector(store => store.authReducer);
+  const [fetchAuth, { data, isLoading }] = useFetchAuthMutation();
+  const { setCredentials, setIsLoginModalVisible } = useActions();
 
   useEffect(() => {
-    if (error) {
+    if (typeof data === 'string') {
       notification.error({
-        message: error,
+        message: data,
       });
     }
-  }, [error]);
 
-  useEffect(() => {
-    if (loading === LoadingStatuses.SUCCESS) {
+    if (typeof data === 'object') {
+      setCredentials(data);
       setIsLoginModalVisible(false);
       form.resetFields();
     }
-  }, [loading]);
+  }, [data]);
 
-  const onFinish = ({ username, password }) => {
-    fetchUser({ username, password });
+  const onFinish = async (values: IUser) => {
+    await fetchAuth(values).unwrap();
   };
 
   return (
@@ -64,7 +63,7 @@ export const LoginForm: FC = () => {
           type="primary"
           htmlType="submit"
           className="login-form__button"
-          loading={loading === LoadingStatuses.PENDING}
+          loading={isLoading}
         >
           Submit
         </Button>

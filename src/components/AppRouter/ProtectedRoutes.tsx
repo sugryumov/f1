@@ -7,9 +7,9 @@ interface IProps {
 }
 
 export const ProtectedRoutes: FC<IProps> = ({ component: RouteComponent }) => {
-  const isAuth = localStorage.getItem('auth');
+  const token = localStorage.getItem('token');
 
-  if (!isAuth) {
+  if (!token) {
     return <Navigate to={RouteNames.LANDING} />;
   }
 

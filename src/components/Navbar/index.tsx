@@ -11,8 +11,9 @@ import './index.css';
 export const Navbar: FC = () => {
   let navigate = useNavigate();
   const { logout, setIsLoginModalVisible } = useActions();
-  const { isAuth } = useTypedSelector(state => state.authReducer);
-  const { isLoginModalVisible } = useTypedSelector(state => state.uiReducer);
+  const { token, isLoginModalVisible } = useTypedSelector(
+    state => state.authReducer,
+  );
 
   const handleClickLogin = () => {
     setIsLoginModalVisible(true);
@@ -34,14 +35,14 @@ export const Navbar: FC = () => {
           <LogoF1 />
         </Col>
 
-        {isAuth && (
+        {token && (
           <Col xs={2} sm={4} md={6} lg={18} xl={18}>
             <Navigation />
           </Col>
         )}
 
         <Col xs={2} sm={4} md={6} lg={3} xl={3} className="app__auth">
-          {isAuth ? (
+          {token ? (
             <Button onClick={handleClickLogout}>Log out</Button>
           ) : (
             <Button onClick={handleClickLogin}>Log in</Button>
