@@ -4,8 +4,13 @@ import { LoginOutlined, LogoutOutlined, MenuOutlined } from '@ant-design/icons';
 import { Navigation } from '../Navigation';
 import './index.css';
 
-// TODO: add props types
-export const MobileMenu: FC<any> = ({
+interface MobileMenuProps {
+  token: string;
+  handleClickLogin: () => void;
+  handleClickLogout: () => void;
+}
+
+export const MobileMenu: FC<MobileMenuProps> = ({
   token,
   handleClickLogin,
   handleClickLogout,

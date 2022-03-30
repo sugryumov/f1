@@ -3,7 +3,13 @@ import { Button } from 'antd';
 import { LoginOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Navigation } from '../Navigation';
 
-export const DesktopMenu: FC<any> = ({
+interface DesktopMenuProps {
+  token: string;
+  handleClickLogin: () => void;
+  handleClickLogout: () => void;
+}
+
+export const DesktopMenu: FC<DesktopMenuProps> = ({
   token,
   handleClickLogin,
   handleClickLogout,
