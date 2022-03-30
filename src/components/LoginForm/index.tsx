@@ -1,4 +1,5 @@
 import { FC, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, Input, Form, notification } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useFetchAuthMutation } from '@/services/authService';
@@ -9,6 +10,7 @@ import './index.css';
 
 export const LoginForm: FC = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   const [fetchAuth, { data, isLoading }] = useFetchAuthMutation();
   const { setCredentials, setIsLoginModalVisible } = useActions();
@@ -24,6 +26,7 @@ export const LoginForm: FC = () => {
       setCredentials(data);
       setIsLoginModalVisible(false);
       form.resetFields();
+      navigate('drivers');
     }
   }, [data]);
 

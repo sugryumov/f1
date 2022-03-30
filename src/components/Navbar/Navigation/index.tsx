@@ -1,44 +1,35 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu } from 'antd';
+import { privateRoutes } from '@/components/AppRouter/routes';
 import './index.css';
 
-export const Navigation: FC = () => (
-  <Menu
-    theme="dark"
-    mode="horizontal"
-    selectable={false}
-    className="navigation"
-  >
-    <Menu.Item key="home" className="navigation__item">
+interface PropsNavigation {
+  isMobile?: boolean;
+}
+
+export const Navigation: FC<PropsNavigation> = ({ isMobile = false }) => {
+  const renderMenuItems: JSX.Element[] = privateRoutes.map(({ path }) => (
+    <Menu.Item key={path} className="navigation__item">
       <NavLink
-        to="/"
+        to={path}
         className={({ isActive }) =>
           isActive ? 'navigation__active' : 'navigation__link'
         }
       >
-        Home
+        {path.charAt(0).toUpperCase() + path.slice(1)}
       </NavLink>
     </Menu.Item>
-    <Menu.Item key="drivers" className="navigation__item">
-      <NavLink
-        to="drivers"
-        className={({ isActive }) =>
-          isActive ? 'navigation__active' : 'navigation__link'
-        }
-      >
-        Drivers
-      </NavLink>
-    </Menu.Item>
-    <Menu.Item key="standings" className="navigation__item">
-      <NavLink
-        to="standings"
-        className={({ isActive }) =>
-          isActive ? 'navigation__active' : 'navigation__link'
-        }
-      >
-        Standings
-      </NavLink>
-    </Menu.Item>
-  </Menu>
-);
+  ));
+
+  return (
+    <Menu
+      theme="dark"
+      mode={isMobile ? 'vertical' : 'horizontal'}
+      selectable={false}
+      className={isMobile ? 'navigation-mobile' : 'navigation'}
+    >
+      {renderMenuItems}
+    </Menu>
+  );
+};

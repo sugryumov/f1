@@ -1,10 +1,28 @@
-.app__header {
-  .app__logo {
-    display: flex;
-    align-items: center;
+.ant-layout-header.app__header {
+  padding: 0 16px;
+  height: 100%;
+}
+
+.header__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+}
+
+.header__menu {
+  flex: 1;
+}
+
+@media (max-width: 600px) {
+  .header__menu {
+    flex: 0;
   }
 
-  .app__auth {
-    text-align: right;
+  .header__logo {
+    width: 70px;
   }
 }

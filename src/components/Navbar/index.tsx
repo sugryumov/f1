@@ -1,15 +1,19 @@
 import { FC } from 'react';
-import { Modal, Button, Col, Layout, Row } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { Modal, Layout } from 'antd';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useActions } from '@/hooks/useActions';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
+import { Breakpoints } from '@/enums/breakpoints';
 import { LogoF1 } from '@/common/SVGIcon';
-import { Navigation } from './Navigation';
 import { LoginForm } from '../LoginForm';
+import { DesktopMenu } from './DesktopMenu';
+import { MobileMenu } from './MobileMenu';
 import './index.css';
 
 export const Navbar: FC = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const breakpoint = useBreakpoint();
   const { logout, setIsLoginModalVisible } = useActions();
   const { token, isLoginModalVisible } = useTypedSelector(
     state => state.authReducer,
@@ -30,28 +34,29 @@ export const Navbar: FC = () => {
 
   return (
     <Layout.Header className="app__header">
-      <Row justify="space-between">
-        <Col xs={2} sm={4} md={6} lg={3} xl={3} className="app__logo">
+      <div className="container header__container">
+        {/* TODO: make as link to home page*/}
+        <div className="header__logo">
           <LogoF1 />
-        </Col>
+        </div>
 
-        {token && (
-          <Col xs={2} sm={4} md={6} lg={18} xl={18}>
-            <Navigation />
-          </Col>
+        {breakpoint === Breakpoints.XS ? (
+          <MobileMenu
+            token={token}
+            handleClickLogin={handleClickLogin}
+            handleClickLogout={handleClickLogout}
+          />
+        ) : (
+          <DesktopMenu
+            token={token}
+            handleClickLogin={handleClickLogin}
+            handleClickLogout={handleClickLogout}
+          />
         )}
-
-        <Col xs={2} sm={4} md={6} lg={3} xl={3} className="app__auth">
-          {token ? (
-            <Button onClick={handleClickLogout}>Log out</Button>
-          ) : (
-            <Button onClick={handleClickLogin}>Log in</Button>
-          )}
-        </Col>
-      </Row>
+      </div>
 
       <Modal
-        title="Basic Modal"
+        title="LOG IN"
         visible={isLoginModalVisible}
         onCancel={handleCancel}
         footer={null}

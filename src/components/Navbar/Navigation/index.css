@@ -4,6 +4,10 @@
 
 .ant-menu-dark.ant-menu-horizontal > .ant-menu-item.navigation__item {
   padding: 0;
+
+  &:hover {
+    background-color: transparent;
+  }
 }
 
 .ant-menu-dark .ant-menu-item .navigation__active {
@@ -12,10 +16,26 @@
 
 .navigation__active {
   display: block;
-  background-color: #1890ff;
   padding: 0 20px;
 }
 
 .navigation__link {
   padding: 0 20px;
+}
+
+.navigation-mobile {
+  margin-bottom: 20px;
+
+  .ant-menu-item.navigation__item {
+    padding: 0;
+  }
+
+  .navigation__link {
+    padding: 0;
+  }
+
+  .navigation__active {
+    padding: 0;
+    background-color: transparent;
+  }
 }
