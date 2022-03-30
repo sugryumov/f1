@@ -11,7 +11,7 @@
 }
 
 .ant-menu-dark .ant-menu-item .navigation__active {
-  color: #fff;
+  color: var(--white-color);
 }
 
 .navigation__active {
