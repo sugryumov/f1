@@ -1,10 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { authApi } from '@/services/authService';
 import { standingsApi } from '@/services/standingsService';
-import authReducer from './reducers/authSlice';
+import { reducers } from './reducers';
 
 const rootReducer = combineReducers({
-  authReducer,
+  ...reducers,
   [authApi.reducerPath]: authApi.reducer,
   [standingsApi.reducerPath]: standingsApi.reducer,
 });

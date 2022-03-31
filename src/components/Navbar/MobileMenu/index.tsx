@@ -1,6 +1,8 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Button, Drawer } from 'antd';
 import { LoginOutlined, LogoutOutlined, MenuOutlined } from '@ant-design/icons';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
+import { useActions } from '@/hooks/useActions';
 import { Navigation } from '../Navigation';
 import './index.css';
 
@@ -15,15 +17,20 @@ export const MobileMenu: FC<MobileMenuProps> = ({
   handleClickLogin,
   handleClickLogout,
 }) => {
-  const [isDrawerVisible, setIsDrawerVisible] = useState<boolean>(false);
+  const { setIsMobileMenuVisible } = useActions();
+  const { isMobileMenuVisible } = useTypedSelector(state => state.uiReducer);
 
   const showDrawer = () => {
-    setIsDrawerVisible(true);
+    setIsMobileMenuVisible(true);
   };
 
-  // TODO: close drawer when changing menu item and logout
   const closeDrawer = () => {
-    setIsDrawerVisible(false);
+    setIsMobileMenuVisible(false);
+  };
+
+  const handlerLogout = () => {
+    handleClickLogout();
+    setIsMobileMenuVisible(false);
   };
 
   return (
@@ -38,14 +45,14 @@ export const MobileMenu: FC<MobileMenuProps> = ({
             width={240}
             onClose={closeDrawer}
             closable={false}
-            visible={isDrawerVisible}
+            visible={isMobileMenuVisible}
             className="header__drawer"
           >
             <Navigation isMobile={true} />
 
             <Button
               type="primary"
-              onClick={handleClickLogout}
+              onClick={handlerLogout}
               className="header__drawer-button"
             >
               Log out <LogoutOutlined />

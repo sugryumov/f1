@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu } from 'antd';
+import { useActions } from '@/hooks/useActions';
 import { privateRoutes } from '@/components/AppRouter/routes';
 import './index.css';
 
@@ -9,10 +10,19 @@ interface PropsNavigation {
 }
 
 export const Navigation: FC<PropsNavigation> = ({ isMobile = false }) => {
+  const { setIsMobileMenuVisible } = useActions();
+
+  const handlerOnClick = () => {
+    if (isMobile) {
+      setIsMobileMenuVisible(false);
+    }
+  };
+
   const renderMenuItems: JSX.Element[] = privateRoutes.map(({ path }) => (
     <Menu.Item key={path} className="navigation__item">
       <NavLink
         to={path}
+        onClick={handlerOnClick}
         className={({ isActive }) =>
           isActive ? 'navigation__active' : 'navigation__link'
         }
