@@ -1,10 +1,11 @@
 import { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Modal, Layout } from 'antd';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useActions } from '@/hooks/useActions';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { Breakpoints } from '@/enums/breakpoints';
+import { RouteNames } from '@/enums/routes';
 import { LogoF1 } from '@/common/SVGIcon';
 import { LoginForm } from '../LoginForm';
 import { DesktopMenu } from './DesktopMenu';
@@ -29,16 +30,15 @@ export const Navbar: FC = () => {
 
   const handleClickLogout = () => {
     logout();
-    navigate('/');
+    navigate(RouteNames.LANDING);
   };
 
   return (
     <Layout.Header className="app__header">
       <div className="container header__container">
-        {/* TODO: make as link to home page*/}
-        <div className="header__logo">
+        <Link className="header__logo" to={RouteNames.LANDING}>
           <LogoF1 />
-        </div>
+        </Link>
 
         {breakpoint === Breakpoints.XS ? (
           <MobileMenu
