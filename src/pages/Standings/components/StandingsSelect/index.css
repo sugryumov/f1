@@ -1,0 +1,20 @@
+.standings-select__select {
+  width: 100%;
+}
+
+.standings-select__title {
+  margin-bottom: 5px;
+  color: var(--gray-color);
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .standings-select__title {
+    font-size: 22px;
+    font-weight: 700;
+  }
+}

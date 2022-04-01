@@ -1,0 +1,13 @@
+.standings__table-wrapper {
+  overflow-x: auto;
+}
+
+.standings__table {
+  .ant-table-cell {
+    white-space: nowrap;
+  }
+}
+
+.standings__row-light {
+  background-color: var(--white-color-secondary);
+}

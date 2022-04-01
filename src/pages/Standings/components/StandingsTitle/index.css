@@ -1,0 +1,56 @@
+.standings__title {
+  max-width: 720px;
+  margin: 50px auto;
+  padding-top: 20px;
+  color: var(--dark-blue-color);
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1;
+  border-top: solid 10px var(--red-color);
+  border-right: solid 10px var(--red-color);
+  border-top-right-radius: 25px;
+}
+
+.standings__skeleton {
+  .ant-skeleton-content {
+    .ant-skeleton-title {
+      height: 82px;
+      margin: 50px 0;
+    }
+  }
+}
+
+@media (max-width: 960px) {
+  .standings__title {
+    max-width: 600px;
+    font-size: 38px;
+  }
+
+  .standings__skeleton {
+    .ant-skeleton-content {
+      .ant-skeleton-title {
+        height: 68px;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .standings__title {
+    margin: 25px auto;
+    padding: 0;
+    font-size: 30px;
+    line-height: 1.2;
+    border: none;
+    text-align: center;
+  }
+
+  .standings__skeleton {
+    .ant-skeleton-content {
+      .ant-skeleton-title {
+        height: 65px;
+        margin: 25px 0;
+      }
+    }
+  }
+}

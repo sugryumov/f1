@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { xml2js } from 'xml-js';
 import { baseUrl } from '@/common/constants';
+import { IStandings, IStandingsParams } from '@/models/IStandings';
 
 export const standingsApi = createApi({
   reducerPath: 'standingsApi',
@@ -8,19 +9,68 @@ export const standingsApi = createApi({
     baseUrl,
   }),
   endpoints: builder => ({
-    getStandings: builder.query<any, number>({
-      query: year => ({
-        url: `${year}/driverStandings`,
+    getStandings: builder.query<IStandings, IStandingsParams>({
+      query: ({ season, standings }) => ({
+        url: `${season}/${standings}`,
         responseHandler: response => response.text(),
       }),
-      transformResponse: (response: string) => {
-        const parseData = xml2js(response, {
+      transformResponse: (response: string): IStandings => {
+        const { elements } = xml2js(response, {
           compact: false,
           ignoreComment: true,
           alwaysChildren: true,
         });
 
-        return parseData.elements[1].elements[0].elements[0].elements;
+        const [_, fistLavel] = elements;
+        const [secondLevel] = fistLavel.elements;
+        const [thirdLevel] = secondLevel.elements;
+
+        const season = thirdLevel.attributes.season;
+        const driversList = thirdLevel.elements;
+        let title: string;
+        let key: string;
+
+        const information = driversList.map(
+          ({ attributes, elements, name }) => {
+            const { position, points } = attributes;
+            title = name;
+
+            const collection = elements.reduce((acc, el, idx) => {
+              const name = el.name;
+              const innerTest = el.elements.reduce((innerAcc, innerEl) => {
+                const innerName = innerEl.name;
+                const [text] = innerEl.elements;
+
+                return {
+                  ...innerAcc,
+                  [innerName]: text.text,
+                };
+              }, {});
+
+              if (idx === 0) {
+                key = el.attributes[`${el.name.toLowerCase()}Id`];
+              }
+
+              return {
+                ...acc,
+                key,
+                [name]: innerTest,
+              };
+            }, {});
+
+            return {
+              position,
+              points,
+              ...collection,
+            };
+          },
+        );
+
+        return {
+          season,
+          title,
+          information,
+        };
       },
     }),
   }),
