@@ -1,8 +1,14 @@
 @import '~antd/dist/antd.css';
 @import './variables.css';
 
+html {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 16px;
   box-sizing: border-box;
 }
