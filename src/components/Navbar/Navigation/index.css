@@ -3,39 +3,21 @@
 }
 
 .ant-menu-dark.ant-menu-horizontal > .ant-menu-item.navigation__item {
-  padding: 0;
-
   &:hover {
     background-color: transparent;
   }
 }
 
-.ant-menu-dark .ant-menu-item .navigation__active {
-  color: var(--white-color);
-}
+.ant-menu-dark .ant-menu-item {
+  box-sizing: border-box;
 
-.navigation__active {
-  display: block;
-  padding: 0 20px;
-}
-
-.navigation__link {
-  padding: 0 20px;
+  .navigation__active {
+    color: var(--white-color);
+  }
 }
 
 .navigation-mobile {
-  margin-bottom: 20px;
-
   .ant-menu-item.navigation__item {
     padding: 0;
-  }
-
-  .navigation__link {
-    padding: 0;
-  }
-
-  .navigation__active {
-    padding: 0;
-    background-color: transparent;
   }
 }
