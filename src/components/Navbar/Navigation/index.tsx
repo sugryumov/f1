@@ -18,7 +18,7 @@ export const Navigation: FC<PropsNavigation> = ({ isMobile = false }) => {
     }
   };
 
-  const renderMenuItems: JSX.Element[] = privateRoutes.map(({ path }) => (
+  const renderMenuItems: JSX.Element[] = privateRoutes.map(({ path, name }) => (
     <Menu.Item key={path} className="navigation__item">
       <NavLink
         to={path}
@@ -27,7 +27,7 @@ export const Navigation: FC<PropsNavigation> = ({ isMobile = false }) => {
           isActive ? 'navigation__active' : 'navigation__link'
         }
       >
-        {path.charAt(0).toUpperCase() + path.slice(1)}
+        {name}
       </NavLink>
     </Menu.Item>
   ));

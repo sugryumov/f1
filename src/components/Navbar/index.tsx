@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { Modal, Layout } from 'antd';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useActions } from '@/hooks/useActions';
@@ -7,6 +7,7 @@ import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { Breakpoints } from '@/enums/breakpoints';
 import { RouteNames } from '@/enums/routes';
 import { LogoF1 } from '@/common/SVGIcon';
+import { allRoutes } from '@/components/AppRouter/routes';
 import { LoginForm } from '../LoginForm';
 import { DesktopMenu } from './DesktopMenu';
 import { MobileMenu } from './MobileMenu';
@@ -14,6 +15,7 @@ import './index.css';
 
 export const Navbar: FC = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const breakpoint = useBreakpoint();
   const { logout, setIsLoginModalVisible } = useActions();
   const { token, isLoginModalVisible } = useTypedSelector(
@@ -33,6 +35,8 @@ export const Navbar: FC = () => {
     navigate(RouteNames.LANDING);
   };
 
+  const { name: pageTitle } = allRoutes.find(({ path }) => pathname === path);
+
   return (
     <Layout.Header className="app__header">
       <div className="container header__container">
@@ -41,11 +45,15 @@ export const Navbar: FC = () => {
         </Link>
 
         {breakpoint === Breakpoints.XS ? (
-          <MobileMenu
-            token={token}
-            handleClickLogin={handleClickLogin}
-            handleClickLogout={handleClickLogout}
-          />
+          <>
+            <p className="header__title-mobile">{pageTitle}</p>
+
+            <MobileMenu
+              token={token}
+              handleClickLogin={handleClickLogin}
+              handleClickLogout={handleClickLogout}
+            />
+          </>
         ) : (
           <DesktopMenu
             token={token}
