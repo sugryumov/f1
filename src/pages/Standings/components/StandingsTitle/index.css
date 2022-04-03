@@ -1,6 +1,6 @@
 .standings__title {
   max-width: 720px;
-  margin: 50px auto;
+  margin: 70px auto;
   padding-top: 20px;
   color: var(--dark-blue-color);
   font-size: 52px;
@@ -15,7 +15,7 @@
   .ant-skeleton-content {
     .ant-skeleton-title {
       height: 82px;
-      margin: 50px 0;
+      margin: 70px 0;
     }
   }
 }
