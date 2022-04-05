@@ -35,7 +35,9 @@ export const Navbar: FC = () => {
     navigate(RouteNames.LANDING);
   };
 
-  const { name: pageTitle } = allRoutes.find(({ path }) => pathname === path);
+  const { name: pageTitle } = allRoutes.find(
+    ({ path }) => pathname === path || pathname === `${path}/`,
+  );
 
   return (
     <Layout.Header className="app__header">
