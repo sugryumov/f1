@@ -1,0 +1,146 @@
+.drivers__container {
+  padding: 70px 0;
+}
+
+.drivers__list {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 20px;
+  row-gap: 40px;
+}
+
+.drivers__item {
+  grid-column: span 4;
+  padding: 10px 10px 0 0;
+  border-top: 1px solid var(--dark-blue-color);
+  border-right: 1px solid var(--dark-blue-color);
+  border-top-right-radius: 10px;
+}
+
+.drivers__item-grid {
+  grid-column: span 3;
+}
+
+.drivers__item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--gray-color-secondary);
+
+  &-pos {
+    margin: 0;
+    line-height: 1;
+    font-size: 46px;
+    font-weight: 900;
+  }
+
+  &-wrap {
+    text-align: center;
+  }
+
+  &-pts {
+    display: block;
+    margin: 0;
+    line-height: 1;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  &-meta {
+    padding: 0 5px 0 10px;
+    background-color: var(--dark-blue-color);
+    border-radius: 3px;
+    color: var(--white-color);
+    font-weight: 600;
+    letter-spacing: 5px;
+  }
+}
+
+.drivers__item-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--gray-color-secondary);
+
+  &-wrap {
+    position: relative;
+    padding-left: 15px;
+    text-transform: uppercase;
+  }
+
+  &-team {
+    position: absolute;
+    left: 0;
+    width: 5px;
+    height: 32px;
+  }
+
+  &-given {
+    margin: 0;
+    line-height: 15px;
+    font-weight: 400;
+  }
+
+  &-family {
+    margin: 0;
+    line-height: 1;
+    font-size: 18px;
+    font-weight: 900;
+  }
+
+  &-flag {
+    overflow: hidden;
+    height: 36px;
+    width: 48px;
+    border-radius: 5px;
+    border: 1px solid var(--gray-color-secondary);
+  }
+}
+
+.drivers__item-main {
+  &-name {
+    margin-bottom: 20px;
+  }
+
+  &-inner {
+    position: relative;
+    height: 167px;
+    background-image: url('../../images/plus-x1.png');
+  }
+
+  &-img {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 192px;
+    height: 192px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .drivers__item {
+    grid-column: span 4;
+  }
+}
+
+@media (max-width: 900px) {
+  .drivers__item {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 600px) {
+  .drivers__container {
+    padding: 30px 0;
+  }
+
+  .drivers__list {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 40px;
+  }
+}
