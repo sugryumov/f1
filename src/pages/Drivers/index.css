@@ -115,10 +115,27 @@
   &-img {
     position: absolute;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 0;
     width: 192px;
     height: 192px;
+  }
+
+  &-number {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 60px;
+    margin: 0;
+    color: var(--gray-color);
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1;
+    background-color: var(--white-color);
   }
 }
 

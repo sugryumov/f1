@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Layout, Result } from 'antd';
 import { StandingsTypes } from '@/enums/standingsTypes';
-import { TEAM_COLORS } from '@/common/constants/teamsColor';
+import { TEAM_COLORS, DRIVER_NUMBERS } from '@/common/constants';
 import { useGetStandingsQuery } from '@/services/standingsService';
 import SVGIcon from '@/common/SVGIcon';
 import './index.css';
@@ -56,6 +56,10 @@ export const Drivers: FC = () => {
           <p className="drivers__item-main-team">{Constructor.Name}</p>
 
           <div className="drivers__item-main-inner">
+            <p className="drivers__item-main-number">
+              {DRIVER_NUMBERS[driverId]}
+            </p>
+
             <img
               className="drivers__item-main-img"
               alt={driverId}
