@@ -1,3 +1,15 @@
 export { default as Australia } from './Australia';
-export { default as Monegasque } from './Monegasque';
+export { default as Canada } from './Canada';
+export { default as China } from './China';
+export { default as Denmark } from './Denmark';
+export { default as Finland } from './Finland';
+export { default as France } from './France';
+export { default as Germany } from './Germany';
+export { default as Japan } from './Japan';
+export { default as Mexico } from './Mexico';
+export { default as Monaco } from './Monaco';
+export { default as Netherlands } from './Netherlands';
+export { default as Spanish } from './Spanish';
+export { default as Thailand } from './Thailand';
+export { default as UnitedKingdom } from './UnitedKingdom';
 export { default as Unknown } from './Unknown';

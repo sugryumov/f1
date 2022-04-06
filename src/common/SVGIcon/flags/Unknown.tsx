@@ -3,9 +3,9 @@ import { ISvgIcon } from '@/models/ISvgIcon';
 const Unknown = ({ width, height }: ISvgIcon) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 640 480"
     width={width}
     height={height}
-    viewBox="0 0 640 480"
   >
     <path
       d="M.5.5h638.9v478.9H.5z"
