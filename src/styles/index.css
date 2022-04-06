@@ -12,3 +12,21 @@ html {
   padding: 0 16px;
   box-sizing: border-box;
 }
+
+@media (max-width: 1200px) {
+  .container {
+    max-width: 966px;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    max-width: 748px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    max-width: 400px;
+  }
+}

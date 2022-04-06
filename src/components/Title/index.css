@@ -1,0 +1,38 @@
+.title__text {
+  margin-bottom: 70px;
+  padding-top: 20px;
+  color: var(--dark-blue-color);
+  font-size: 62px;
+  line-height: 1;
+  border-top: solid 10px var(--red-color);
+  border-right: solid 10px var(--red-color);
+  border-top-right-radius: 25px;
+}
+
+.title__skeleton {
+  .ant-skeleton-content {
+    .ant-skeleton-title {
+      height: 92px;
+      margin: 0 0 70px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .title__text {
+    margin-bottom: 40px;
+    padding-top: 5px;
+    font-size: 32px;
+    border-top: solid 5px var(--red-color);
+    border-right: solid 5px var(--red-color);
+  }
+
+  .title__skeleton {
+    .ant-skeleton-content {
+      .ant-skeleton-title {
+        height: 37px;
+        margin: 0 0 40px;
+      }
+    }
+  }
+}

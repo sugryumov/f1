@@ -3,7 +3,9 @@ import { Layout, Result } from 'antd';
 import { StandingsTypes } from '@/enums/standingsTypes';
 import { TEAM_COLORS, DRIVER_NUMBERS } from '@/common/constants';
 import { useGetStandingsQuery } from '@/services/standingsService';
+import { Title } from '@/components/Title';
 import SVGIcon from '@/common/SVGIcon';
+import { DriversSkileton } from './components/DriversSkileton';
 import './index.css';
 
 export const Drivers: FC = () => {
@@ -30,8 +32,8 @@ export const Drivers: FC = () => {
         <div className="drivers__item-header">
           <p className="drivers__item-header-pos">{position}</p>
           <div className="drivers__item-header-wrap">
-            <span className="drivers__item-header-pts">{points}</span>
-            <span className="drivers__item-header-meta">PTS</span>
+            <p className="drivers__item-header-pts">{points}</p>
+            <p className="drivers__item-header-meta">PTS</p>
           </div>
         </div>
 
@@ -63,7 +65,7 @@ export const Drivers: FC = () => {
             <img
               className="drivers__item-main-img"
               alt={driverId}
-              src={`../drivers/${driverId}.png`}
+              src={`/assets/drivers/${driverId}.png`}
             />
           </div>
         </div>
@@ -76,7 +78,13 @@ export const Drivers: FC = () => {
       <div className="drivers__container">
         {error && <Result status="error">{error}</Result>}
 
-        <div className="drivers__list">{renderContent}</div>
+        <Title loading={isFetching} text="F1 Drivers 2022" />
+
+        {isFetching ? (
+          <DriversSkileton />
+        ) : (
+          <div className="drivers__list">{renderContent}</div>
+        )}
       </div>
     </Layout.Content>
   );

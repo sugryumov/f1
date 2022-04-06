@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Result, Layout } from 'antd';
 import { useGetStandingsQuery } from '@/services/standingsService';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { StandingsTitle } from './components/StandingsTitle';
+import { Title } from '@/components/Title';
 import { StandingsSelect } from './components/StandingsSelect';
 import { StandingsTable } from './components/StandingsTable';
 import './index.css';
@@ -16,6 +16,13 @@ export const Standings: FC = () => {
 
   const { season, title, information } = data || {};
 
+  const titleWithSpaces = title
+    ?.split('')
+    .map(el => (el === el.toUpperCase() ? ` ${el}` : el))
+    .join('');
+
+  const titleText = `${season} ${titleWithSpaces}`;
+
   return (
     <Layout.Content className="container">
       <div className="standings__container">
@@ -26,7 +33,7 @@ export const Standings: FC = () => {
           <StandingsSelect type="standings" />
         </div>
 
-        <StandingsTitle season={season} title={title} isFetching={isFetching} />
+        <Title loading={isFetching} text={titleText} />
 
         <StandingsTable
           data={information}
