@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'f1-regular';
+  src: url('../fonts/formula1-regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'f1-bold';
+  src: url('../fonts/formula1-bold.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}

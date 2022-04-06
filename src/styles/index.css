@@ -1,9 +1,18 @@
 @import '~antd/dist/antd.css';
 @import './variables.css';
+@import './fonts.css';
 
 html {
   width: 100vw;
   overflow-x: hidden;
+}
+
+h1 {
+  font-family: 'f1-bold';
+}
+
+p {
+  font-family: 'f1-regular';
 }
 
 .container {
