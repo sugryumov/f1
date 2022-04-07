@@ -11,10 +11,18 @@
 .header__logo {
   display: flex;
   align-items: center;
+  width: 100px;
 }
 
 .header__menu {
   flex: 1;
+}
+
+.header__button {
+  span {
+    font-size: 12px;
+    text-transform: uppercase;
+  }
 }
 
 @media (max-width: 600px) {

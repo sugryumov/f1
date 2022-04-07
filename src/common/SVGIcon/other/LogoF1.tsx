@@ -1,10 +1,6 @@
-import { SVGProps } from 'react';
+import { ISvgIcon } from '@/models/ISvgIcon';
 
-export const LogoF1 = ({
-  width = 120,
-  height = 30,
-  fill = '#E00',
-}: SVGProps<SVGSVGElement>) => (
+const LogoF1 = ({ width, height, fill }: ISvgIcon) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 120 30"
@@ -21,3 +17,5 @@ export const LogoF1 = ({
     <use fill={fill} xlinkHref="#a" fillRule="evenodd" />
   </svg>
 );
+
+export default LogoF1;

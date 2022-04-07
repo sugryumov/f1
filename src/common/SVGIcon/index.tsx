@@ -1,5 +1,6 @@
-import { nationality } from '@/enums/nationality';
+import { nationality, other } from '@/enums/svgIcons';
 import { ISvgIcon } from '@/models/ISvgIcon';
+import { LogoF1 } from './other';
 import {
   Australia,
   Canada,
@@ -18,10 +19,11 @@ import {
   Unknown,
 } from './flags';
 
-export { LogoF1 } from './LogoF1';
-
 const getPath = (name: string, props: ISvgIcon) => {
   switch (name) {
+    case other.Logo:
+      return <LogoF1 {...props} />;
+
     case nationality.Australian:
       return <Australia {...props} />;
 
@@ -69,7 +71,11 @@ const getPath = (name: string, props: ISvgIcon) => {
   }
 };
 
-const SVGIcon = ({ name = '', width = '100%', height = '100%' }: ISvgIcon) =>
-  getPath(name, { width, height });
+const SVGIcon = ({
+  name = '',
+  width = '100%',
+  height = '100%',
+  fill,
+}: ISvgIcon) => getPath(name, { width, height, fill });
 
 export default SVGIcon;

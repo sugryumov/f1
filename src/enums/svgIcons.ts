@@ -14,3 +14,7 @@ export enum nationality {
   German = 'German',
   Thai = 'Thai',
 }
+
+export enum other {
+  Logo = 'LogoF1',
+}

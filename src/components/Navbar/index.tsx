@@ -6,7 +6,8 @@ import { useActions } from '@/hooks/useActions';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { Breakpoints } from '@/enums/breakpoints';
 import { RouteNames } from '@/enums/routes';
-import { LogoF1 } from '@/common/SVGIcon';
+import { other } from '@/enums/svgIcons';
+import SVGIcon from '@/common/SVGIcon';
 import { allRoutes } from '@/components/AppRouter/routes';
 import { LoginForm } from '../LoginForm';
 import { DesktopMenu } from './DesktopMenu';
@@ -43,7 +44,7 @@ export const Navbar: FC = () => {
     <Layout.Header className="app__header">
       <div className="container header__container">
         <Link className="header__logo" to={RouteNames.LANDING}>
-          <LogoF1 />
+          <SVGIcon name={other.Logo} fill="#E00" />
         </Link>
 
         {breakpoint === Breakpoints.XS ? (
