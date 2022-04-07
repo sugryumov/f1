@@ -23,11 +23,19 @@ export const DesktopMenu: FC<DesktopMenuProps> = ({
 
     <div className="header__auth">
       {token ? (
-        <Button type="primary" onClick={handleClickLogout}>
+        <Button
+          type="primary"
+          onClick={handleClickLogout}
+          className="header__button"
+        >
           Log out <LogoutOutlined />
         </Button>
       ) : (
-        <Button type="primary" onClick={handleClickLogin}>
+        <Button
+          type="primary"
+          onClick={handleClickLogin}
+          className="header__button"
+        >
           Log in <LoginOutlined />
         </Button>
       )}

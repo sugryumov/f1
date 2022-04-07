@@ -13,9 +13,6 @@
 
   .ant-drawer-title {
     color: var(--white-color);
-  }
-
-  .header__drawer-button {
-    margin-top: 30px;
+    text-transform: uppercase;
   }
 }

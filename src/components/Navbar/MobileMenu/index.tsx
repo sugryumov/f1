@@ -53,7 +53,7 @@ export const MobileMenu: FC<MobileMenuProps> = ({
             <Button
               type="primary"
               onClick={handlerLogout}
-              className="header__drawer-button"
+              className="header__button"
             >
               Log out <LogoutOutlined />
             </Button>

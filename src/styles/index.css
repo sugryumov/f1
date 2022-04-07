@@ -11,7 +11,9 @@ h1 {
   font-family: 'f1-bold';
 }
 
-p {
+p,
+a,
+div {
   font-family: 'f1-regular';
 }
 

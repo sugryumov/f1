@@ -10,6 +10,7 @@
 
 .ant-menu-dark .ant-menu-item {
   box-sizing: border-box;
+  font-size: 12px;
 
   .navigation__active {
     color: var(--white-color);
