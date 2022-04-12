@@ -1,19 +1,32 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
-const { src, build, public } = require('./paths');
+const { src, public } = require('./paths');
 
 module.exports = {
   entry: [`${src}/index.tsx`],
 
-  output: {
-    path: build,
-    filename: '[name].bundle.js',
-    publicPath: '/',
-    clean: true,
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          transpileOnly: true,
+        },
+      },
+
+      { test: /\.(?:ico|gif|png|jpg|jpeg)$/i, type: 'asset/resource' },
+
+      { test: /\.(woff(2)?|eot|ttf|otf|svg|)$/, type: 'asset/inline' },
+    ],
   },
 
   plugins: [
+    new ForkTsCheckerWebpackPlugin(),
+
     new CopyWebpackPlugin({
       patterns: [{ from: public, to: 'assets' }],
     }),
@@ -23,22 +36,6 @@ module.exports = {
       template: `${src}/index.html`,
     }),
   ],
-
-  module: {
-    rules: [
-      { test: /\.(js|jsx)$/, use: ['babel-loader'] },
-
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      },
-
-      { test: /\.(?:ico|gif|png|jpg|jpeg)$/i, type: 'asset/resource' },
-
-      { test: /\.(woff(2)?|eot|ttf|otf|svg|)$/, type: 'asset/inline' },
-    ],
-  },
 
   resolve: {
     modules: [src, 'node_modules'],
