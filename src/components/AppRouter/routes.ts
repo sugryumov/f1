@@ -1,4 +1,5 @@
 import { ComponentType } from 'react';
+import { Schedule } from '@/pages/Schedule';
 import { Standings } from '@/pages/Standings';
 import { Drivers } from '@/pages/Drivers';
 import { Landing } from '@/pages/Landing';
@@ -30,6 +31,12 @@ export const publicRoutes: IRoute[] = [
 ];
 
 export const privateRoutes: IRoute[] = [
+  {
+    key: RouteNames.SCHEDULE,
+    path: RouteNames.SCHEDULE,
+    component: Schedule,
+    name: 'SCHEDULE',
+  },
   {
     key: RouteNames.DRIVERS,
     path: RouteNames.DRIVERS,
