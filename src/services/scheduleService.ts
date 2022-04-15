@@ -20,7 +20,56 @@ export const scheduleApi = createApi({
           alwaysChildren: true,
         });
 
-        console.log('elements', elements);
+        const [_, fistLavel] = elements;
+        const [secondLevel] = fistLavel.elements;
+        const raceList = secondLevel.elements;
+
+        const data = raceList.map(elements => {
+          const {
+            attributes: { round },
+            elements: raceInfo,
+          } = elements;
+
+          const collection = raceInfo.reduce((acc, el) => {
+            const name = el.name;
+
+            if (name === 'Circuit') {
+              return { ...acc, key: el.attributes.circuitId };
+            }
+
+            if (name.includes('Practice') || name === 'Qualifying') {
+              const practices = el.elements.reduce((acc, practice) => {
+                const [text] = practice.elements;
+
+                return {
+                  ...acc,
+                  [practice.name]: text.text,
+                };
+              }, {});
+
+              return {
+                ...acc,
+                [el.name]: {
+                  ...practices,
+                },
+              };
+            }
+
+            const [text] = el.elements;
+
+            return {
+              ...acc,
+              [name]: text.text,
+            };
+          }, {});
+
+          return {
+            round,
+            ...collection,
+          };
+        });
+
+        return data;
       },
     }),
   }),

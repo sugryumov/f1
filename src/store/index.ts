@@ -1,12 +1,14 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { authApi } from '@/services/authService';
 import { standingsApi } from '@/services/standingsService';
+import { scheduleApi } from '@/services/scheduleService';
 import { reducers } from './reducers';
 
 const rootReducer = combineReducers({
   ...reducers,
   [authApi.reducerPath]: authApi.reducer,
   [standingsApi.reducerPath]: standingsApi.reducer,
+  [scheduleApi.reducerPath]: scheduleApi.reducer,
 });
 
 export const store = configureStore({
