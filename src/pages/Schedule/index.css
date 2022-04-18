@@ -9,6 +9,22 @@
   row-gap: 40px;
 }
 
+.schedule__item {
+  grid-column: span 4;
+  padding: 10px 10px 0 0;
+  border-top: 1px solid var(--dark-blue-color);
+  border-right: 1px solid var(--dark-blue-color);
+  border-top-right-radius: 10px;
+}
+
+.schedule__item-8 {
+  grid-column: span 8;
+}
+
+.schedule__item-12 {
+  grid-column: span 12;
+}
+
 @media (max-width: 600px) {
   .schedule__container {
     padding: 40px 0;
