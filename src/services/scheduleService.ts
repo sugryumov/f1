@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { xml2js } from 'xml-js';
 import { baseUrl } from '@/common/constants';
+import { prepareDataRace } from '@/utils/data';
 
 export const scheduleApi = createApi({
   reducerPath: 'scheduleApi',
@@ -69,7 +70,7 @@ export const scheduleApi = createApi({
           };
         });
 
-        return data;
+        return prepareDataRace(data);
       },
     }),
   }),
