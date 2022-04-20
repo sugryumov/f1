@@ -8,6 +8,8 @@ import './index.css';
 export const Schedule: FC = () => {
   const { data, error, isFetching } = useGetScheduleQuery({});
 
+  console.log('data', data);
+
   const renderContent = () =>
     data?.map(({ key, status, RaceName }, idx: number) => {
       let styled = 'schedule__item';
@@ -20,6 +22,14 @@ export const Schedule: FC = () => {
         <div key={key} className={styled}>
           <p>{RaceName}</p>
           <p>{status}</p>
+
+          <div className="schedule__item-inner">
+            <img
+              className="schedule__item-img"
+              alt={key}
+              src={`/assets/circuits/${key}.png`}
+            />
+          </div>
         </div>
       );
     });
