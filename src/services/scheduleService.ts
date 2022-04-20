@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { xml2js } from 'xml-js';
 import { baseUrl } from '@/common/constants';
 import { prepareDataRace } from '@/utils/data';
+import { IScheduleData } from '@/models/ISchedule';
 
 export const scheduleApi = createApi({
   reducerPath: 'scheduleApi',
@@ -9,12 +10,12 @@ export const scheduleApi = createApi({
     baseUrl,
   }),
   endpoints: builder => ({
-    getSchedule: builder.query<any, any>({
+    getSchedule: builder.query<IScheduleData[], any>({
       query: () => ({
         url: '/current',
         responseHandler: response => response.text(),
       }),
-      transformResponse: async (response: string): Promise<any> => {
+      transformResponse: async (response: string): Promise<IScheduleData[]> => {
         const { elements } = xml2js(response, {
           compact: false,
           ignoreComment: true,
