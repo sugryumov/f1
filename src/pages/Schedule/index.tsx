@@ -8,8 +8,6 @@ import './index.css';
 export const Schedule: FC = () => {
   const { data, error, isFetching } = useGetScheduleQuery({});
 
-  console.log('data', data);
-
   const renderContent = () =>
     data?.map(({ key, status, RaceName }, idx: number) => {
       let styled = 'schedule__item';
