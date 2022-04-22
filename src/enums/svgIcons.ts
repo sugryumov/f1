@@ -15,6 +15,31 @@ export enum nationality {
   Thai = 'Thai',
 }
 
+export enum circuits {
+  AlbertPark = 'albert_park',
+  Americas = 'americas',
+  Bak = 'BAK',
+  Bahrain = 'bahrain',
+  Catalunya = 'catalunya',
+  Hungaroring = 'hungaroring',
+  Interlagos = 'interlagos',
+  Imola = 'imola',
+  Jeddah = 'jeddah',
+  MarinaBay = 'marina_bay',
+  Miami = 'miami',
+  Monaco = 'monaco',
+  Monza = 'monza',
+  RedBullRing = 'red_bull_ring',
+  Ricard = 'ricard',
+  Rodriguez = 'rodriguez',
+  Silverstone = 'silverstone',
+  Spa = 'spa',
+  Suzuka = 'suzuka',
+  Villeneuve = 'villeneuve',
+  YasMarina = 'yas_marina',
+  Zandvoort = 'zandvoort',
+}
+
 export enum other {
   Logo = 'LogoF1',
 }
