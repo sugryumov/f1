@@ -12,11 +12,20 @@ export const Schedule: FC = () => {
 
   const renderContent = () =>
     data?.map((race, idx) => {
-      const { key, round, status, Date: dateRace, FirstPractice } = race;
+      const {
+        key,
+        round,
+        status,
+        Date: dateRace,
+        FirstPractice,
+        RaceName,
+      } = race;
+
+      const nextRace = status === RaceStatuses.NEXT;
 
       let styled = 'schedule__item';
 
-      if (status === RaceStatuses.NEXT) {
+      if (nextRace) {
         styled += idx % 3 === 1 ? ' schedule__item-8' : ' schedule__item-12';
       }
 
@@ -26,36 +35,37 @@ export const Schedule: FC = () => {
       const monthText =
         startMonth === endMonth
           ? MONTH[endMonth]
-          : `${MONTH[startMonth]}-${MONTH[endMonth]}`;
+          : `${MONTH[startMonth]}—${MONTH[endMonth]}`;
 
       return (
         <div key={key} className={styled}>
-          <span className="schedule__item-round">{`ROUND ${round}`}</span>
+          <span className="schedule__item-round">
+            {nextRace ? `NEXT ROUND ${round}` : `ROUND ${round}`}
+          </span>
           <div className="schedule__item-header">
             <div className="schedule__item-header-date">
               <p className="schedule__item-header-days">
-                {`${startDate} - ${endDate}`}
+                {`${startDate}—${endDate}`}
               </p>
 
               <p className="schedule__item-header-month">{monthText}</p>
             </div>
 
-            <div className="schedule__item-info-flag">
+            <div className="schedule__item-header-flag">
               <SVGIcon name={key} />
             </div>
-
-            {/* <p className="schedule__item-header-pos">{position}</p>
-            <div className="schedule__item-header-wrap">
-              <p className="schedule__item-header-pts">{points}</p>
-              <p className="schedule__item-header-meta">PTS</p>
-            </div> */}
           </div>
-          {/* <p>{RaceName}</p>
-          <p>{status}</p> */}
 
-          <div className="schedule__item-inner">
+          <div className="schedule__item-info">
+            <p className="schedule__item-info-name-title"></p>
+            <p className="schedule__item-info-name">
+              Formula 1 {RaceName} 2022
+            </p>
+          </div>
+
+          <div className="schedule__item-main">
             <img
-              className="schedule__item-img"
+              className="schedule__item-main-img"
               alt={key}
               src={`/assets/circuits/${key}.png`}
             />

@@ -8,13 +8,13 @@ html {
 }
 
 h1 {
-  font-family: 'f1-bold';
+  font-family: var(--font-bold);
 }
 
 p,
 a,
 div {
-  font-family: 'f1-regular';
+  font-family: var(--font-regular);
 }
 
 .container {
