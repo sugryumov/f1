@@ -49,26 +49,6 @@
     font-size: 32px;
     white-space: nowrap;
   }
-
-  &-month {
-    display: inline-block;
-    margin: 0;
-    padding: 0 5px 0 10px;
-    text-align: center;
-    background-color: var(--dark-blue-color);
-    border-radius: 3px;
-    color: var(--white-color);
-    font-family: var(--font-bold);
-    letter-spacing: 5px;
-  }
-
-  &-flag {
-    overflow: hidden;
-    height: 36px;
-    width: 48px;
-    border-radius: 5px;
-    border: 1px solid var(--gray-color-secondary);
-  }
 }
 
 .schedule__item-info {

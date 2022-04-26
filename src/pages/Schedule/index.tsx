@@ -48,10 +48,10 @@ export const Schedule: FC = () => {
                 {`${startDate}—${endDate}`}
               </p>
 
-              <p className="schedule__item-header-month">{monthText}</p>
+              <p className="caption">{monthText}</p>
             </div>
 
-            <div className="schedule__item-header-flag">
+            <div className="small-flag">
               <SVGIcon name={key} />
             </div>
           </div>

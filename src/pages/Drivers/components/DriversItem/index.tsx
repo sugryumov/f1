@@ -18,7 +18,7 @@ export const DriversItem: FC<any> = ({ driver, idx }) => {
         <p className="drivers__item-header-pos">{position}</p>
         <div className="drivers__item-header-wrap">
           <p className="drivers__item-header-pts">{points}</p>
-          <p className="drivers__item-header-meta">PTS</p>
+          <p className="caption">PTS</p>
         </div>
       </div>
 
@@ -34,7 +34,7 @@ export const DriversItem: FC<any> = ({ driver, idx }) => {
           <p className="drivers__item-info-family">{Driver.FamilyName}</p>
         </div>
 
-        <div className="drivers__item-info-flag">
+        <div className="small-flag">
           <SVGIcon name={Driver.Nationality} />
         </div>
       </div>
