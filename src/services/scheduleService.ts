@@ -15,15 +15,15 @@ export const scheduleApi = createApi({
         url: '/current',
         responseHandler: response => response.text(),
       }),
-      transformResponse: async (response: string): Promise<IScheduleData[]> => {
+      transformResponse: (response: string): IScheduleData[] => {
         const { elements } = xml2js(response, {
           compact: false,
           ignoreComment: true,
           alwaysChildren: true,
         });
 
-        const [_, fistLavel] = elements;
-        const [secondLevel] = fistLavel.elements;
+        const [_, fistLevel] = elements;
+        const [secondLevel] = fistLevel.elements;
         const raceList = secondLevel.elements;
 
         const data = raceList.map(elements => {
@@ -39,7 +39,11 @@ export const scheduleApi = createApi({
               return { ...acc, key: el.attributes.circuitId };
             }
 
-            if (name.includes('Practice') || name === 'Qualifying') {
+            if (
+              name.includes('Practice') ||
+              name === 'Qualifying' ||
+              name === 'Sprint'
+            ) {
               const practices = el.elements.reduce((acc, practice) => {
                 const [text] = practice.elements;
 

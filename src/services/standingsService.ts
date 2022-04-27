@@ -21,8 +21,8 @@ export const standingsApi = createApi({
           alwaysChildren: true,
         });
 
-        const [_, fistLavel] = elements;
-        const [secondLevel] = fistLavel.elements;
+        const [_, fistLevel] = elements;
+        const [secondLevel] = fistLevel.elements;
         const [thirdLevel] = secondLevel.elements;
 
         const season = thirdLevel.attributes.season;
@@ -36,7 +36,6 @@ export const standingsApi = createApi({
             title = name;
 
             const collection = elements.reduce((acc, el, idx) => {
-              const name = el.name;
               const innerTest = el.elements.reduce((innerAcc, innerEl) => {
                 const innerName = innerEl.name;
                 const [text] = innerEl.elements;
@@ -54,7 +53,7 @@ export const standingsApi = createApi({
               return {
                 ...acc,
                 key,
-                [name]: innerTest,
+                [el.name]: innerTest,
               };
             }, {});
 
