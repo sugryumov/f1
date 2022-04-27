@@ -1,8 +1,10 @@
 import { FC } from 'react';
 import { Layout, Result } from 'antd';
+import { Link } from 'react-router-dom';
 import { useGetScheduleQuery } from '@/services/scheduleService';
 import { RaceStatuses } from '@/enums/raceStatuses';
 import { Title } from '@/components/Title';
+import { CIRCUIT_COUNTRIES } from '@/common/constants/circuits';
 import { MONTH } from '@/common/constants/month';
 import SVGIcon from '@/common/SVGIcon';
 import './index.css';
@@ -22,11 +24,16 @@ export const Schedule: FC = () => {
       } = race;
 
       const nextRace = status === RaceStatuses.NEXT;
+      const passedRace = status === RaceStatuses.PASSED;
 
       let styled = 'schedule__item';
 
       if (nextRace) {
         styled += idx % 3 === 1 ? ' schedule__item-8' : ' schedule__item-12';
+      }
+
+      if (passedRace) {
+        styled += ' schedule__item-hover';
       }
 
       const [, startMonth, startDate] = FirstPractice.Date.split('-');
@@ -57,7 +64,18 @@ export const Schedule: FC = () => {
           </div>
 
           <div className="schedule__item-info">
-            <p className="schedule__item-info-name-title"></p>
+            {passedRace ? (
+              <Link
+                to="#"
+                className="schedule__item-info-title schedule__item-info-link"
+              >
+                {CIRCUIT_COUNTRIES[key]}
+              </Link>
+            ) : (
+              <p className="schedule__item-info-title">
+                {CIRCUIT_COUNTRIES[key]}
+              </p>
+            )}
             <p className="schedule__item-info-name">
               Formula 1 {RaceName} 2022
             </p>
