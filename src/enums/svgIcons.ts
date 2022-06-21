@@ -18,7 +18,7 @@ export enum nationality {
 export enum circuits {
   AlbertPark = 'albert_park',
   Americas = 'americas',
-  Bak = 'BAK',
+  Baku = 'baku',
   Bahrain = 'bahrain',
   Catalunya = 'catalunya',
   Hungaroring = 'hungaroring',

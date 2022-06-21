@@ -1,7 +1,7 @@
 export const CIRCUIT_COUNTRIES = {
   albert_park: 'Bahrain',
   americas: 'USA',
-  BAK: 'Azerbaijan',
+  baku: 'Azerbaijan',
   bahrain: 'Bahrain',
   catalunya: 'Spain',
   hungaroring: 'Hungary',

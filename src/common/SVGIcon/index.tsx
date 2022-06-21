@@ -42,7 +42,7 @@ const getPath = (name: string, props: ISvgIcon) => {
     case circuits.RedBullRing:
       return <Austria {...props} />;
 
-    case circuits.Bak:
+    case circuits.Baku:
       return <Azerbaijan {...props} />;
 
     case circuits.Bahrain:
