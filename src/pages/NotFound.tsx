@@ -1,5 +1,3 @@
 import { FC } from 'react';
 
-export const NotFound: FC = () => {
-  return <div>NotFound</div>;
-};
+export const NotFound: FC = () => <div>NotFound</div>;
