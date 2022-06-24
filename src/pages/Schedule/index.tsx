@@ -16,13 +16,17 @@ export const Schedule: FC = () => {
 
         <Title loading={isFetching} text="F1 Schedule 2022" />
 
-        <div className="schedule__list">
-          {data?.map((race, idx) => (
-            <Fragment key={race?.key}>
-              <RaceItem idx={idx} race={race} />
-            </Fragment>
-          ))}
-        </div>
+        {isFetching ? (
+          <SkeletonGrid />
+        ) : (
+          <div className="schedule__list">
+            {data?.map((race, idx) => (
+              <Fragment key={race?.key}>
+                <RaceItem idx={idx} race={race} />
+              </Fragment>
+            ))}
+          </div>
+        )}
       </div>
     </Layout.Content>
   );

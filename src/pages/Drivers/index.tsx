@@ -3,7 +3,7 @@ import { Layout, Result } from 'antd';
 import { StandingsTypes } from '@/enums/standingsTypes';
 import { useGetStandingsQuery } from '@/services/standingsService';
 import { Title } from '@/components/Title';
-import { DriversSkileton } from './components/DriversSkileton';
+import { SkeletonGrid } from '@/components/SkeletonGrid';
 import { DriversItem } from './components/DriversItem';
 import './index.css';
 
@@ -21,7 +21,7 @@ export const Drivers: FC = () => {
         <Title loading={isFetching} text="F1 Drivers 2022" />
 
         {isFetching ? (
-          <DriversSkileton />
+          <SkeletonGrid />
         ) : (
           <div className="drivers__list">
             {data?.information?.map((driver, idx) => (
