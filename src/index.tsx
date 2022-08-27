@@ -7,7 +7,7 @@ import '@/styles/index.css';
 
 render(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename="/f1">
       <App />
     </BrowserRouter>
   </Provider>,
