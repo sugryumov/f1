@@ -1,6 +1,7 @@
 {
   "name": "webpcak",
   "version": "1.0.0",
+  "homepage": "/f1",
   "description": "",
   "main": "index.js",
   "scripts": {
