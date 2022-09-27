@@ -8,12 +8,12 @@ export const AppRouter = () => (
   <Routes>
     <Route path={RouteNames.LANDING} element={<AppLayout />}>
       {publicRoutes.map(
-        ({ index, key, path, component: RouteCompoent }: IRoute) => (
+        ({ index, key, path, component: RouteComponent }: IRoute) => (
           <Route
             index={index}
             key={key}
             path={path}
-            element={<RouteCompoent />}
+            element={<RouteComponent />}
           />
         ),
       )}
