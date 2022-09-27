@@ -7,3 +7,10 @@
 .login-form__button {
   width: 100%;
 }
+
+.login-form__description {
+  p {
+    margin: 0;
+    font-size: 12px;
+  }
+}

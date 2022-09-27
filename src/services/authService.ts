@@ -15,7 +15,7 @@ export const authApi = createApi({
       }),
       transformResponse: (response: IUser) => {
         const findUser =
-          response.username === 'admin' && response.password === '123';
+          response.username === 'user' && response.password === '123';
 
         if (findUser) {
           const token = 'sgk7bk8ejm14mls4';
